@@ -81,7 +81,7 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
                 })
                 .catch((err) => {
                     const errArray = [];
-                    console.log(err);
+                    // console.log(err);
                     for (const key of Object.keys(err.response.data.errors)) {
                         errArray.push(err.response.data.errors[key].message);
                     }
@@ -99,7 +99,7 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
                 })
                 .catch((err) => {
                     const errArray = [];
-                    console.log(err);
+                    // console.log(err);
                     for (const key of Object.keys(err.response.data.errors)) {
                         errArray.push(err.response.data.errors[key].message);
                     }

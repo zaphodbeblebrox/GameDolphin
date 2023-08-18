@@ -12,6 +12,7 @@ const Dashboard = ({ cheats }) => {
         const uniqueGamesArr = Array.from(uniqueGamesSet);
         // Filter based on Search Quarry
         const filteredGames = uniqueGamesArr.filter((game) => game.toLowerCase().startsWith(searchQuery.toLowerCase()));
+        filteredGames.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
         setDisplayedGames(filteredGames);
     }, [cheats, searchQuery]);
 

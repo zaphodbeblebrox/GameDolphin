@@ -20,8 +20,7 @@ function App() {
         axios
             .get(`${cheatApi}`)
             .then((res) => {
-                const sortedData = res.data.sort((a, b) => a.game.localeCompare(b.game));
-                setCheats(sortedData);
+                setCheats(res.data);
             })
             .catch((err) => console.log(err));
     }, []);
