@@ -3,6 +3,18 @@ import { Link } from "react-router-dom";
 
 const Dashboard = ({ cheats }) => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [displayedGames, setDisplayedGames] = useState([]);
+
+    useEffect(() => {
+        const uniqueGamesSet = new Set(cheats.map((cheat) => cheat.game));
+        const uniqueGamesArr = Array.from(uniqueGamesSet);
+        const filteredGames = uniqueGamesArr.filter((game) => game.toLowerCase().startsWith(searchQuery.toLowerCase()));
+        setDisplayedGames(filteredGames);
+    }, [searchQuery]);
+
+    // useEffect(() => {
+    //     const updatedDisplay = cheats.filter((game) => game.toLowerCase().startsWith(searchValue.toLowerCase()));
+    // }, [searchQuery]);
 
     return (
         <div>
@@ -24,11 +36,11 @@ const Dashboard = ({ cheats }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cheats.map((game) => {
+                    {displayedGames.map((game, idx) => {
                         return (
-                            <tr key={game._id}>
+                            <tr key={idx}>
                                 <td>
-                                    <Link to={`/gamedolphin/${game.game}`}>{game.game}</Link>
+                                    <Link to={`/gamedolphin/${game}`}>{game}</Link>
                                 </td>
                             </tr>
                         );
