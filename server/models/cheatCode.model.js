@@ -12,7 +12,7 @@ const GameDolphineSchema = new mongoose.Schema(
 
         description: {
             type: String,
-            required: true,
+            required: [true, "Cheat Description is required"],
             trim: true,
             minlength: [3, "Game description cannot be empty!"],
             maxlength: [255, "Game description cannot exceed 255 characters!"],
@@ -20,16 +20,16 @@ const GameDolphineSchema = new mongoose.Schema(
 
         instructions: {
             type: String,
-            required: true,
+            required: [true, "Cheat Instructions is required"],
             trim: true,
             minlength: [3, "Instructions cannot be blank!"],
         },
 
         platform: {
             type: [String],
-            required: true,
+            required: [true, "At least one Platform is required!"],
             trim: true,
-            minlength: [1, "Platform/console must be added"],
+            validate: [(val) => val.length >= 1, "At least one Platform is required!"],
         },
     },
     { timestamps: true }
