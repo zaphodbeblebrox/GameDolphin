@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { cheatApi } from "../services/apiAddress";
 
-const EditCreateCheat = (props) => {
+const EditCreateCheat = ({ cheats, setCheats }) => {
     const { cheatId } = useParams();
     const platformOptions = [
         "NES",
@@ -36,6 +38,24 @@ const EditCreateCheat = (props) => {
     const [platform, setPlatform] = useState(platformOptions[0]);
     const [platformArray, setPlatformArray] = useState([]);
 
+    const [errors, setErrors] = useState([]);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (cheatId !== undefined) {
+            axios
+                .get(`${cheatApi}/${cheatId}`)
+                .then((res) => {
+                    setGameName(res.data.game);
+                    setCheatInstructions(res.data.instructions);
+                    setCheatDescription(res.data.description);
+                    setPlatformArray(res.data.platform);
+                })
+                .catch((err) => console.log(err));
+        }
+    }, []);
+
     const AddPlatformHandler = (e) => {
         e.preventDefault();
         const platformHolder = [...platformArray];
@@ -45,6 +65,48 @@ const EditCreateCheat = (props) => {
 
     const SaveDataHandler = (e) => {
         e.preventDefault();
+        const cheatObj = {
+            game: gameName,
+            instructions: cheatInstructions,
+            description: cheatDescription,
+            platform: platformArray,
+        };
+        console.log(cheatObj.platform.length);
+        if (cheatId === undefined) {
+            axios
+                .post(`${cheatApi}`, cheatObj)
+                .then((res) => {
+                    setCheats([...cheats, res.data]);
+                    navigate("/gamedolphin/dashboard");
+                })
+                .catch((err) => {
+                    const errArray = [];
+                    console.log(err);
+                    for (const key of Object.keys(err.response.data.errors)) {
+                        errArray.push(err.response.data.errors[key].message);
+                    }
+                    console.log(errArray);
+                    setErrors(errArray);
+                });
+        } else {
+            axios
+                .patch(`${cheatApi}/${cheatId}`, cheatObj)
+                .then((res) => {
+                    const temp = cheats.filter((cheat) => cheat._id !== cheatId);
+                    temp.push(res.data);
+                    setCheats([...temp]);
+                    navigate("/gamedolphin/dashboard");
+                })
+                .catch((err) => {
+                    const errArray = [];
+                    console.log(err);
+                    for (const key of Object.keys(err.response.data.errors)) {
+                        errArray.push(err.response.data.errors[key].message);
+                    }
+                    console.log(errArray);
+                    setErrors(errArray);
+                });
+        }
     };
 
     const RemoveSelectionHandler = (e, idx) => {
@@ -56,6 +118,11 @@ const EditCreateCheat = (props) => {
 
     return (
         <form onSubmit={(e) => SaveDataHandler(e)}>
+            <div>
+                {errors.map((err, idx) => {
+                    return <p key={idx}>{err}</p>;
+                })}
+            </div>
             <div>
                 <label htmlFor="game-name">Game:</label>
                 <input type="text" name="game-name" id="game-name" value={gameName} onChange={(e) => setGameName(e.target.value)} />
@@ -102,6 +169,7 @@ const EditCreateCheat = (props) => {
                     })}
                 </div>
             </div>
+            <button>{cheatId !== undefined ? "Update" : "Create"}</button>
         </form>
     );
 };

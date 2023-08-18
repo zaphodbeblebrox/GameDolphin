@@ -13,7 +13,7 @@ const Dashboard = ({ cheats }) => {
         // Filter based on Search Quarry
         const filteredGames = uniqueGamesArr.filter((game) => game.toLowerCase().startsWith(searchQuery.toLowerCase()));
         setDisplayedGames(filteredGames);
-    }, [searchQuery]);
+    }, [cheats, searchQuery]);
 
     return (
         <div>

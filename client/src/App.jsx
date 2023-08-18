@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import axios from "axios";
 import Dashboard from "./components/Dashboard";
 import EditCreateCheat from "./components/EditCreateCheat";
 import Game from "./components/Game";
@@ -8,25 +9,28 @@ import { cheatApi } from "./services/apiAddress";
 import { useEffect, useState } from "react";
 
 function App() {
-    const [cheats, setCheats] = useState([
-        { game: "minecraft", _id: "3asd4f351fsa63" },
-        { game: "dark Souls", _id: "s165gf1sdf651d" },
-    ]);
+    // const [cheats, setCheats] = useState([
+    //     { game: "minecraft", _id: "3asd4f351fsa63" },
+    //     { game: "dark Souls", _id: "s165gf1sdf651d" },
+    // ]);
+    const [cheats, setCheats] = useState([]);
 
     // TODO: axios in DB
     useEffect(() => {
-        // axios
-        //     .get(`${cheatApi}`)
-        //     .then((res) => {
-        //         const sortedData = res.data.sort((a, b) => a.game.localeCompare(b.game));
-        //         setCheats(sortedData);
-        //     })
-        //     .catch((err) => console.log(err));
+        axios
+            .get(`${cheatApi}`)
+            .then((res) => {
+                // const sortedData = res.data.sort((a, b) => a.game.localeCompare(b.game));
+                setCheats(res.data);
+            })
+            .catch((err) => console.log(err));
 
-        const sortedData = cheats.sort((a, b) => a.game.localeCompare(b.game));
+        // const sortedData = cheats.sort((a, b) => a.game.localeCompare(b.game));
 
-        setCheats([...sortedData]);
+        // setCheats([...sortedData]);
     }, []);
+
+    useEffect(() => console.log(cheats), [cheats]);
 
     return (
         <BrowserRouter Router>
