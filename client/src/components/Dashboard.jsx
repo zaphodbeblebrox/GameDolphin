@@ -12,10 +12,6 @@ const Dashboard = ({ cheats }) => {
         setDisplayedGames(filteredGames);
     }, [searchQuery]);
 
-    // useEffect(() => {
-    //     const updatedDisplay = cheats.filter((game) => game.toLowerCase().startsWith(searchValue.toLowerCase()));
-    // }, [searchQuery]);
-
     return (
         <div>
             <div>
@@ -28,11 +24,10 @@ const Dashboard = ({ cheats }) => {
                     placeholder="Search"
                 />
             </div>
-            <h3 className="headers">Available Games</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Games</th>
+                        <th>Available Games</th>
                     </tr>
                 </thead>
                 <tbody>
