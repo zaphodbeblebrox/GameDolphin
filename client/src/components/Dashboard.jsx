@@ -6,8 +6,11 @@ const Dashboard = ({ cheats }) => {
     const [displayedGames, setDisplayedGames] = useState([]);
 
     useEffect(() => {
+        // Create an unique Set of game names
         const uniqueGamesSet = new Set(cheats.map((cheat) => cheat.game));
+        // Convert into an Array
         const uniqueGamesArr = Array.from(uniqueGamesSet);
+        // Filter based on Search Quarry
         const filteredGames = uniqueGamesArr.filter((game) => game.toLowerCase().startsWith(searchQuery.toLowerCase()));
         setDisplayedGames(filteredGames);
     }, [searchQuery]);
@@ -15,6 +18,7 @@ const Dashboard = ({ cheats }) => {
     return (
         <div>
             <div>
+                <Link to={"/gamedolphin/create"}>Add Cheat</Link>
                 <input
                     type="text"
                     name="search-bar"
