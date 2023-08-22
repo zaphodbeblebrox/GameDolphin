@@ -32,7 +32,7 @@ const Dashboard = ({ cheats }) => {
             <table>
                 <thead>
                     <tr>
-                        <th>Available Games</th>
+                        <th className="text-4xl font-bold text-blue-600">Available Games</th>
                     </tr>
                 </thead>
                 <tbody>
