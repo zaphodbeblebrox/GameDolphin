@@ -115,63 +115,113 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
         platformHolder.splice(idx, 1);
         setPlatformArray([...platformHolder]);
     };
+return (
+    <form onSubmit={(e) => SaveDataHandler(e)} className="bg-gray-900 text-white min-h-screen p-8">
+        <div>
+            {errors.map((err, idx) => {
+                return <p key={idx}>{err}</p>;
+            })}
+        </div>
+        <div className="mb-4">
+            <div className="flex">
+                <div className="w-1/4 mr-4">
+                    <label htmlFor="game-name" className="block text-white font-semibold mb-1">
+                        Game:
+                    </label>
+                    <input
+                        type="text"
+                        name="game-name"
+                        id="game-name"
+                        value={gameName}
+                        onChange={(e) => setGameName(e.target.value)}
+                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                    />
+                </div>
+                <div className="w-3/4">
+                    <label htmlFor="cheat-description" className="block text-white font-semibold mb-1">
+                        Cheat Description:
+                    </label>
+                    <input
+                        type="text"
+                        name="cheat-description"
+                        id="cheat-description"
+                        value={cheatDescription}
+                        onChange={(e) => setCheatDescription(e.target.value)}
+                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                    />
+                </div>
+            </div>
+            <div className="flex mt-4">
+                <div className="w-1/4 mr-4">
+                    <label htmlFor="cheat-instructions" className="block text-white font-semibold mb-1">
+                        Cheat Instructions:
+                    </label>
+                    <input
+                        type="text"
+                        name="cheat-instructions"
+                        id="cheat-instructions"
+                        value={cheatInstructions}
+                        onChange={(e) => setCheatInstructions(e.target.value)}
+                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                    />
+                </div>
+                <div className="w-3/4">
+                    <label htmlFor="add-platform" className="block text-white font-semibold mb-1">
+                        Add a Platform:
+                    </label>
+                    <select
+                        name="add-platform"
+                        id="add-platform"
+                        value={platform}
+                        onChange={(e) => setPlatform(e.target.value)}
+                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                    >
+                        {platformOptions.map((platform, idx) => {
+                            return (
+                                <option key={idx} value={platform}>
+                                    {platform}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
+            </div>
+            <div className="mt-4">
+            <div className="flex items-center justify-center mt-4">
+    <button
+        onClick={(e) => AddPlatformHandler(e)}
+        className="block text-white font-semibold mb-1">
+        Click to add
+    </button>
+</div>
 
-    return (
-        <form onSubmit={(e) => SaveDataHandler(e)}>
-            <div>
-                {errors.map((err, idx) => {
-                    return <p key={idx}>{err}</p>;
-                })}
-            </div>
-            <div>
-                <label htmlFor="game-name">Game:</label>
-                <input type="text" name="game-name" id="game-name" value={gameName} onChange={(e) => setGameName(e.target.value)} />
-            </div>
-            <div>
-                <label htmlFor="cheat-description">Cheat Description:</label>
-                <input
-                    type="text"
-                    name="cheat-description"
-                    id="cheat-description"
-                    value={cheatDescription}
-                    onChange={(e) => setCheatDescription(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="cheat-instructions">Cheat Instructions:</label>
-                <input
-                    type="text"
-                    name="cheat-instructions"
-                    id="cheat-instructions"
-                    value={cheatInstructions}
-                    onChange={(e) => setCheatInstructions(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="add-platform">Add a Platform:</label>
-                <select name="add-platform" id="add-platform" value={platform} onChange={(e) => setPlatform(e.target.value)}>
-                    {platformOptions.map((platform, idx) => {
-                        return (
-                            <option key={idx} value={platform}>
-                                {platform}
-                            </option>
-                        );
-                    })}
-                </select>
-                <button onClick={(e) => AddPlatformHandler(e)}>+</button>
                 <div>
                     {platformArray.map((selectedPlatform, idx) => {
                         return (
-                            <button key={idx} onClick={(e) => RemoveSelectionHandler(e, idx)}>
+                            <button
+                                key={idx}
+                                onClick={(e) => RemoveSelectionHandler(e, idx)}
+                                className="rounded-md bg-gray-800 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50 mr-2"
+                            >
                                 {selectedPlatform}
                             </button>
                         );
                     })}
                 </div>
             </div>
-            <button>{cheatId !== undefined ? "Update" : "Create"}</button>
-        </form>
-    );
+        </div>
+        <button
+            className="rounded-md bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+        >
+            {cheatId !== undefined ? "Update" : "Create"}
+        </button>
+    </form>
+);
+
+    
+    
+    
+    
 };
 
 export default EditCreateCheat;
