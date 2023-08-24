@@ -15,7 +15,7 @@ const Dashboard = ({ cheats }) => {
 
     return (
         <div className=" text-white min-h-screen">
-            <div className="flex justify-center items-center py-16 sm:py-24 lg:py-32 ">
+            <div className="flex justify-center items-center py-16 sm:py-24 lg:py-32 table-auto">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mb-4 flex items-center">
                         <Link
@@ -36,10 +36,10 @@ const Dashboard = ({ cheats }) => {
                     </div>
                 </div>
             </div>
-            <table className="mx-auto max-w-7xl px-6 lg:px-8 -mt-10">
+            <table className="w-full border-collapse border border-gray-700 rounded-md bg-gray-900">
                 <thead>
                     <tr>
-                        <th className="text-white">Available Games</th>
+                        <th className="text-white bg-gray-800 py-2 px-4">Available Games</th>
                     </tr>
                 </thead>
                 <tbody>
