@@ -115,17 +115,16 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
         platformHolder.splice(idx, 1);
         setPlatformArray([...platformHolder]);
     };
-return (
-    <form onSubmit={(e) => SaveDataHandler(e)} className="bg-gray-900 text-white min-h-screen p-8">
-        <div>
-            {errors.map((err, idx) => {
-                return <p key={idx}>{err}</p>;
-            })}
-        </div>
-        <div className="mb-4">
-            <div className="flex">
-                <div className="w-1/4 mr-4">
-                    <label htmlFor="game-name" className="block text-white font-semibold mb-1">
+    return (
+        <form onSubmit={(e) => SaveDataHandler(e)} className="bg-gray-900 text-white min-h-screen p-8">
+            <div>
+                {errors.map((err, idx) => {
+                    return <p key={idx}>{err}</p>;
+                })}
+            </div>
+            <div className="mb-4 flex flex-col items-start justify-start">
+                <div className="game-name w-1/4 mr-4 flex flex-row m-2">
+                    <label htmlFor="game-name" className="block text-white font-semibold mr-3">
                         Game:
                     </label>
                     <input
@@ -137,8 +136,8 @@ return (
                         className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
-                <div className="w-3/4">
-                    <label htmlFor="cheat-description" className="block text-white font-semibold mb-1">
+                <div className="cheat-description w-3/4 flex flex-row m-2">
+                    <label htmlFor="cheat-description" className="block text-white font-semibold mr-3">
                         Cheat Description:
                     </label>
                     <input
@@ -150,10 +149,8 @@ return (
                         className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
-            </div>
-            <div className="flex mt-4">
-                <div className="w-1/4 mr-4">
-                    <label htmlFor="cheat-instructions" className="block text-white font-semibold mb-1">
+                <div className="cheat-instructions w-1/4 mr-4 flex flex-row m-2">
+                    <label htmlFor="cheat-instructions" className="block text-white font-semibold mr-3">
                         Cheat Instructions:
                     </label>
                     <input
@@ -165,8 +162,8 @@ return (
                         className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
-                <div className="w-3/4">
-                    <label htmlFor="add-platform" className="block text-white font-semibold mb-1">
+                <div className="platform w-3/4 flex flex-row m-2">
+                    <label htmlFor="add-platform" className="block text-white font-semibold mr-3">
                         Add a Platform:
                     </label>
                     <select
@@ -184,44 +181,34 @@ return (
                             );
                         })}
                     </select>
+                    <button
+                        onClick={(e) => AddPlatformHandler(e)}
+                        className="rounded-md bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                    >
+                        Click to add
+                    </button>
+                </div>
+                <div className="mt-4">
+                    <div>
+                        {platformArray.map((selectedPlatform, idx) => {
+                            return (
+                                <button
+                                    key={idx}
+                                    onClick={(e) => RemoveSelectionHandler(e, idx)}
+                                    className="rounded-md bg-gray-800 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50 mr-2"
+                                >
+                                    {selectedPlatform}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
-            <div className="mt-4">
-            <div className="flex items-center justify-center mt-4">
-    <button
-        onClick={(e) => AddPlatformHandler(e)}
-        className="block text-white font-semibold mb-1">
-        Click to add
-    </button>
-</div>
-
-                <div>
-                    {platformArray.map((selectedPlatform, idx) => {
-                        return (
-                            <button
-                                key={idx}
-                                onClick={(e) => RemoveSelectionHandler(e, idx)}
-                                className="rounded-md bg-gray-800 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50 mr-2"
-                            >
-                                {selectedPlatform}
-                            </button>
-                        );
-                    })}
-                </div>
-            </div>
-        </div>
-        <button
-            className="rounded-md bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
-        >
-            {cheatId !== undefined ? "Update" : "Create"}
-        </button>
-    </form>
-);
-
-    
-    
-    
-    
+            <button className="rounded-md bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                {cheatId !== undefined ? "Update" : "Create"}
+            </button>
+        </form>
+    );
 };
 
 export default EditCreateCheat;
