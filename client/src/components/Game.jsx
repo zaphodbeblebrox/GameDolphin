@@ -23,7 +23,7 @@ const Game = ({ cheats, setCheats }) => {
     };
 
     return (
-        <div className="bg-gray-900 text-white min-h-screen p-8">
+        <div className=" text-white min-h-screen p-8">
             <table className="w-full border-collapse border border-gray-700 rounded-md bg-gray-900 mt-8">
                 <thead>
                     <tr>
@@ -46,7 +46,10 @@ const Game = ({ cheats, setCheats }) => {
                                 </td>
                                 <td>
                                     <Link to={`/gamedolphin/update/${cheat._id}`}>Update</Link>
-                                    <button onClick={(e) => DeleteCheatHandler(e, cheat._id)} className="text-red-500">  Delete </button>
+                                    <button onClick={(e) => DeleteCheatHandler(e, cheat._id)} className="text-red-500 ml-3">
+                                        {" "}
+                                        Delete{" "}
+                                    </button>
                                 </td>
                             </tr>
                         );
@@ -55,7 +58,6 @@ const Game = ({ cheats, setCheats }) => {
             </table>
         </div>
     );
-    
 };
 
 export default Game;

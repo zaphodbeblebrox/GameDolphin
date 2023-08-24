@@ -116,15 +116,15 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
         setPlatformArray([...platformHolder]);
     };
     return (
-        <form onSubmit={(e) => SaveDataHandler(e)} className="bg-gray-900 text-white min-h-screen p-8">
+        <form onSubmit={(e) => SaveDataHandler(e)} className=" text-white min-h-screen p-8">
             <div>
                 {errors.map((err, idx) => {
                     return <p key={idx}>{err}</p>;
                 })}
             </div>
             <div className="mb-4 flex flex-col items-start justify-start">
-                <div className="game-name w-1/4 mr-4 flex flex-row m-2">
-                    <label htmlFor="game-name" className="block text-white font-semibold mr-3">
+                <div className="game-name w-1/4 flex flex-row m-2">
+                    <label htmlFor="game-name" className="block text-white font-semibold mr-3 whitespace-nowrap">
                         Game:
                     </label>
                     <input
@@ -133,11 +133,12 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
                         id="game-name"
                         value={gameName}
                         onChange={(e) => setGameName(e.target.value)}
-                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                        style={{ width: "30ch" }}
+                        className=" w-full bg-gray-800 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
                 <div className="cheat-description w-3/4 flex flex-row m-2">
-                    <label htmlFor="cheat-description" className="block text-white font-semibold mr-3">
+                    <label htmlFor="cheat-description" className="block text-white font-semibold mr-3 whitespace-nowrap">
                         Cheat Description:
                     </label>
                     <input
@@ -146,11 +147,11 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
                         id="cheat-description"
                         value={cheatDescription}
                         onChange={(e) => setCheatDescription(e.target.value)}
-                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                        className="w-full bg-gray-800 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
                 <div className="cheat-instructions w-1/4 mr-4 flex flex-row m-2">
-                    <label htmlFor="cheat-instructions" className="block text-white font-semibold mr-3">
+                    <label htmlFor="cheat-instructions" className="block text-white font-semibold mr-3 whitespace-nowrap">
                         Cheat Instructions:
                     </label>
                     <input
@@ -159,11 +160,11 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
                         id="cheat-instructions"
                         value={cheatInstructions}
                         onChange={(e) => setCheatInstructions(e.target.value)}
-                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                        className="w-full bg-gray-800 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
                 <div className="platform w-3/4 flex flex-row m-2">
-                    <label htmlFor="add-platform" className="block text-white font-semibold mr-3">
+                    <label htmlFor="add-platform" className="block text-white font-semibold mr-3 whitespace-nowrap">
                         Add a Platform:
                     </label>
                     <select
@@ -171,7 +172,7 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
                         id="add-platform"
                         value={platform}
                         onChange={(e) => setPlatform(e.target.value)}
-                        className="w-full bg-gray-800 px-3.5 py-2 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
+                        className="w-full bg-gray-800 rounded-md border-0 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm"
                     >
                         {platformOptions.map((platform, idx) => {
                             return (
@@ -185,7 +186,7 @@ const EditCreateCheat = ({ cheats, setCheats }) => {
                         onClick={(e) => AddPlatformHandler(e)}
                         className="rounded-md bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
                     >
-                        Click to add
+                        Add
                     </button>
                 </div>
                 <div className="mt-4">

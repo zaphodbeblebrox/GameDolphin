@@ -9,13 +9,19 @@ import { cheatApi } from "./services/apiAddress";
 import { useEffect, useState } from "react";
 
 function App() {
-    // const [cheats, setCheats] = useState([
-    //     { game: "minecraft", _id: "3asd4f351fsa63" },
-    //     { game: "dark Souls", _id: "s165gf1sdf651d" },
-    // ]);
     const [cheats, setCheats] = useState([]);
+    const backgroundImage = "/static/images/80s_neon.jpg";
 
-    // TODO: axios in DB
+    const containerStyle = {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "repeat",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        minHeight: "100vh", // Take up full viewport height
+        width: "100vw", // Take up full viewport width
+    };
+
     useEffect(() => {
         axios
             .get(`${cheatApi}`)
@@ -29,7 +35,7 @@ function App() {
 
     return (
         <BrowserRouter Router>
-            <div className="App">
+            <div className="App" style={containerStyle}>
                 <div>
                     <Header />
                 </div>
